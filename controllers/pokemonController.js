@@ -1,4 +1,4 @@
-const pokemonModel = require('./models/pokemonModel');
+const pokemonModel = require('../models/pokemonModel');
 
 const getAllPokemons = (req, res) => {
     const pokemons = pokemonModel.getPokemons();
