@@ -14,4 +14,10 @@ const getPokemon = (req, res) => {
     }
 };
 
-module.exports = { getAllPokemons, getPokemon };
+const createPokemon = (req, res) => {
+    const { nome, tipo } = req.body;
+    pokemonModel.createPokemon(nome, tipo);
+    res.redirect('/'); 
+};
+
+module.exports = { getAllPokemons, getPokemon, createPokemon };
