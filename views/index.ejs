@@ -9,10 +9,20 @@
     <ul>
         <% pokemons.forEach(function(pokemon) { %>
             <li>
-                <a href="/pokemon/<%= pokemon.id %>"><%= pokemon.nome %>
-                </a> - <%= pokemon.tipo %>
+                <a href="/pokemon/<%= pokemon.id %>"><%= pokemon.nome %></a> - <%= pokemon.tipo %>
             </li>
-            <% }); %>
+        <% }); %>
     </ul>
+
+    <h2>Adicionar Novo Pokémon</h2>
+    <form action="/pokemon" method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="tipo">Tipo:</label>
+        <input type="text" id="tipo" name="tipo" required>
+
+        <button type="submit">Adicionar Pokémon</button>
+    </form>
 </body>
 </html>
