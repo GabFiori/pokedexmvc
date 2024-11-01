@@ -11,7 +11,7 @@ const createTreinador = (req, res) => {
     const pokemonIds = Array.isArray(pokemons) ? pokemons.map(id => parseInt(id)) : [];
     const ownedPokemons = pokemonIds.map(id => pokemonModel.getPokemonById(id)).filter(pokemon => pokemon);
 
-    treinadorrModel.createTreinador(nome, ownedPokemons);
+    treinadorModel.createTreinador(nome, ownedPokemons);
     res.redirect('/treinadores');
 };
 
