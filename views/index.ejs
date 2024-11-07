@@ -2,27 +2,82 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Pokédex</title>
+    <title>Pokédex e Treinadores</title>
 </head>
 <body>
-    <h1>Pokédex</h1>
-    <ul>
-        <% pokemons.forEach(function(pokemon) { %>
-            <li>
-                <a href="/pokemon/<%= pokemon.id %>"><%= pokemon.nome %></a> - <%= pokemon.tipo %>
-            </li>
-        <% }); %>
-    </ul>
+    <h1>Pokédex e Treinadores</h1>
 
-    <h2>Adicionar Novo Pokémon</h2>
-    <form action="/pokemon" method="POST">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
+    <div>
+        <button onclick="mostrarPokemons()">Ver Pokémons</button>
+        <button onclick="mostrarTreinadores()">Ver Treinadores</button>
+    </div>
 
-        <label for="tipo">Tipo:</label>
-        <input type="text" id="tipo" name="tipo" required>
+    <div id="pokemons-section" style="display: block;">
+        <h2>Lista de Pokémons</h2>
+        <ul>
+            <% if (pokemons && pokemons.length > 0) { %>
+                <% pokemons.forEach(function(pokemon) { %>
+                    <li>
+                        <a href="/pokemon/<%= pokemon.id %>"><%= pokemon.nome %></a> - <%= pokemon.tipo %>
+                    </li>
+                <% }); %>
+            <% } else { %>
+                <li>Nenhum Pokémon cadastrado.</li>
+            <% } %>
+        </ul>
 
-        <button type="submit">Adicionar Pokémon</button>
-    </form>
+        <h3>Adicionar Novo Pokémon</h3>
+        <form action="/pokemon" method="POST">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+            <label for="tipo">Tipo:</label>
+            <input type="text" id="tipo" name="tipo" required>
+            <button type="submit">Adicionar Pokémon</button>
+        </form>
+    </div>
+
+    <div id="treinadores-section" style="display: none;">
+        <h2>Lista de Treinadores</h2>
+        <ul>
+            <% if (trainers && trainers.length > 0) { %>
+                <% trainers.forEach(function(treinador) { %>
+                    <li>
+                        <a href="/trainers/<%= treinador.id %>"><%= treinador.nome %></a> - 
+                        Pokémons: <%= treinador.pokemons.map(pokemon => pokemon.nome).join(', ') %>
+                    </li>
+                <% }); %>
+            <% } else { %>
+                <li>Nenhum Treinador cadastrado.</li>
+            <% } %>
+        </ul>
+
+        <h3>Adicionar Novo Treinador</h3>
+        <form action="/trainers" method="POST">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required>
+
+            <label for="pokemons">Pokémons:</label>
+            <select id="pokemons" name="pokemons" multiple>
+                <% if (pokemons && pokemons.length > 0) { %>
+                    <% pokemons.forEach(function(pokemon) { %>
+                        <option value="<%= pokemon.id %>"><%= pokemon.nome %></option>
+                    <% }); %>
+                <% } %>
+            </select>
+
+            <button type="submit">Adicionar Treinador</button>
+        </form>
+    </div>
+
+    <script>
+        function mostrarPokemons() {
+            document.getElementById('pokemons-section').style.display = 'block';
+            document.getElementById('treinadores-section').style.display = 'none';
+        }
+        function mostrarTreinadores() {
+            document.getElementById('pokemons-section').style.display = 'none';
+            document.getElementById('treinadores-section').style.display = 'block';
+        }
+    </script>
 </body>
 </html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Perfil de Treinador - <%= treinador.nome %></title>
+</head>
+<body>
+    <h1>Perfil de Treinador: <%= treinador.nome %></h1>
+
+    <h2>Inventário de Pokémons</h2>
+    <ul>
+        <% treinador.pokemons.forEach(function(pokemon) { %>
+            <li><%= pokemon.nome %> - <%= pokemon.tipo %></li>
+        <% }); %>
+    </ul>
+
+    <h3>Editar Perfil</h3>
+    <form action="/treinador/<%= treinador.id %>/edit" method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" value="<%= treinador.nome %>" required>
+
+        <label for="pokemons">Pokémons:</label>
+        <select id="pokemons" name="pokemons" multiple>
+            <% pokemons.forEach(function(pokemon) { %>
+                <option value="<%= pokemon.id %>"
+                    <% if (treinador.pokemons.find(p => p.id === pokemon.id)) { %> selected <% } %>>
+                    <%= pokemon.nome %>
+                </option>
+            <% }); %>
+        </select>
+
+        <button type="submit">Salvar Alterações</button>
+    </form>
+
+    <a href="/treinadores">Voltar para Lista de Treinadores</a>
+</body>
+</html>

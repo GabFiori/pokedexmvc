@@ -1,4 +1,4 @@
-const treinadorModel = require('../models/trainerModel');
+const treinadorModel = require('../models/treinadorModel');
 const pokemonModel = require('../models/pokemonModel');
 
 const getAllTreinadores = (req, res) => {

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Treinadores</title>
+</head>
+<body>
+    <h1>Lista de Treinadores</h1>
+
+    <ul>
+        <% trainers.forEach(function(treinador) { %>
+            <li>
+                <a href="/treinador/<%= treinador.id %>"><%= treinador.nome %></a> - 
+                Pokémons: <%= treinador.pokemons.map(pokemon => pokemon.nome).join(', ') %>
+            </li>
+        <% }); %>
+    </ul>
+
+    <a href="/">Voltar à Página Inicial</a>
+</body>
+</html>
