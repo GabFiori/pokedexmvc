@@ -12,7 +12,7 @@ const createTreinador = (req, res) => {
     const ownedPokemons = pokemonIds.map(id => pokemonModel.getPokemonById(id)).filter(pokemon => pokemon);
 
     treinadorModel.createTreinador(nome, ownedPokemons);
-    res.redirect('/treinadores');
+    res.redirect('/trainers');
 };
 
 const getTreinador = (req, res) => {
@@ -31,7 +31,7 @@ const editTreinador = (req, res) => {
     const updatedPokemons = pokemonIds.map(id => pokemonModel.getPokemonById(id)).filter(pokemon => pokemon);
 
     trainadorModel.updateTreinador(req.params.id, nome, updatedPokemons);
-    res.redirect('/treinadores');
+    res.redirect('/trainers');
 };
 
 module.exports = { getAllTreinadores, createTreinador, getTreinador, editTreinador };
